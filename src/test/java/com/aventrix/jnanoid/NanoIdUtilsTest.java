@@ -51,7 +51,6 @@ import static org.junit.Assert.fail;
  */
 public class NanoIdUtilsTest {
 
-
     @Test
     public void NanoIdUtils_VerifyClassIsFinal_Verified() {
         if ((NanoIdUtils.class.getModifiers() & Modifier.FINAL) != Modifier.FINAL) {
@@ -77,13 +76,12 @@ public class NanoIdUtilsTest {
 
         for (int i = 0; i < idCount; i++) {
             final String id = NanoIdUtils.randomNanoId();
-            if (ids.contains(id) == false) {
+            if (!ids.contains(id)) {
                 ids.add(id);
             } else {
                 fail("Non-unique ID generated: " + id);
             }
         }
-
     }
 
     @Test
@@ -105,7 +103,6 @@ public class NanoIdUtilsTest {
             final String generatedId = NanoIdUtils.randomNanoId(random, alphabet, size);
             assertEquals(expectedId, generatedId);
         }
-
     }
 
     @Test
@@ -133,7 +130,6 @@ public class NanoIdUtilsTest {
 
             assertTrue(id.matches(patternBuilder.toString()));
         }
-
     }
 
     @Test
@@ -183,7 +179,6 @@ public class NanoIdUtilsTest {
             final double distribution = (charCount * alphabet.length / (double) (idCount * idSize));
             assertThat(distribution, Matchers.closeTo(1.0, 0.05));
         }
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -211,7 +206,6 @@ public class NanoIdUtilsTest {
         }
 
         NanoIdUtils.randomNanoId(new SecureRandom(), largeAlphabet, 20);
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -223,5 +217,4 @@ public class NanoIdUtilsTest {
     public void randomNanoId_ZeroSize_ExceptionThrown() {
         NanoIdUtils.randomNanoId(new SecureRandom(), new char[] {'a', 'b', 'c'}, 0);
     }
-
 }
